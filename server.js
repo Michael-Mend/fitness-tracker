@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const logger = require('morgan');
 
 //Setting up port
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 
 // Set models folder to db variable
 const db = require('./models');
