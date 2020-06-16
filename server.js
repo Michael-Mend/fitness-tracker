@@ -23,7 +23,7 @@ app.use(express.static('public'));
 app.use(logger('dev'));
 
 //Starting database with mongoose
-mongoose.connect(process.env.MONGOLAB_COPPER_URI || 'mongodb://localhost/workout', {
+mongoose.connect(process.env.ATLAS_URI || 'mongodb://localhost/workout', {
 	useNewUrlParser: true,
 	useFindAndModify: false,
 	useUnifiedTopology: true
