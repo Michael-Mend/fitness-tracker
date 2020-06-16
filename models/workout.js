@@ -1,44 +1,39 @@
-// Require mongoose
 const mongoose = require('mongoose');
 
-// Create schema variable
 const Schema = mongoose.Schema;
 
-const WorkoutSchema = new Schema({
-	day: Date,
+const workoutSchema = new Schema({
+    day: {
+        type: Date,
+        default: Date.now
+    },
+    exercises: [
+        {
+            type: {
+                type: String
+            },
+            name: {
+                type: String
+            },
+            duration: {
+                type: Number
+            },
+            distance: {
+                type: Number
+            },
+            weight: {
+                type: Number
+            },
+            reps: {
+                type: Number
+            },
+            sets: {
+                type: Number
+            }
+        }
+    ]
+})
 
-	exercises: [
-		{
-			type: {
-				type: String
-			},
-			name: {
-				type: String
-			},
-			distance: {
-				type: Number
-			},
-			duration: {
-				type: Number
-			},
-			weight: {
-				type: Number
-			},
-			sets: {
-				type: Number
-			},
-			reps: {
-				type: Number
-			}
-		}
-	]
-});
-
-WorkoutSchema.methods.workoutDay = function() {
-	this.day = Date.now();
-	return this.day;
-};
-
-const Workout = mongoose.model('Workout', WorkoutSchema);
+const Workout = mongoose.model('Workout', workoutSchema);
 
 module.exports = Workout;

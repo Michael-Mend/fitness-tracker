@@ -1,38 +1,26 @@
-// Requiring necessary npm packages
-const express = require('express');
-const mongoose = require('mongoose');
-const logger = require('morgan');
+const express = require("express");
+const mongoose = require("mongoose");
 
-//Setting up port
 const PORT = process.env.PORT || 3000;
 
-// Set models folder to db variable
-const db = require('./models');
-
-// Creating express app
 const app = express();
 
-//Configuring middleware needed for parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Static directory
-app.use(express.static('public'));
+// routes
+require("./routes/apiRoutes")(app);
+require("./routes/htmlRoutes")(app);
 
-// Morgan middleware
-app.use(logger('dev'));
+app.use(express.static("public"));
 
-//Starting database with mongoose
-mongoose.connect(process.env.ATLAS_URI || 'mongodb://localhost/workout', {
-	useNewUrlParser: true,
-	useFindAndModify: false,
-	useUnifiedTopology: true
+const ATLAS_URI = process.env.ATLAS_URI || "mongodb://localhost/workout";
+
+mongoose.connect(ATLAS_URI, {
+    useNewUrlParser: true,
+    useFindAndModify: false
 });
 
-//Routes
-require('./routes/html-routes.js')(app);
-require('./routes/api-routes.js')(app);
-
-//Start server to listen
-app.listen(PORT, () => console.log(`App running on http://localhost:%s/`, PORT));
-
+app.listen(PORT, () => {
+    console.log(`App running on port ${PORT}!`);
+});
