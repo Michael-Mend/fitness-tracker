@@ -14,9 +14,9 @@ require("./routes/htmlRoutes")(app);
 
 app.use(express.static("public"));
 
-const ATLAS_URI = process.env.ATLAS_URI || "mongodb://localhost/workout";
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/workout";
 
-mongoose.connect(ATLAS_URI, {
+mongoose.connect(MONGODB_URI, {
     useNewUrlParser: true,
     useFindAndModify: false
 });
